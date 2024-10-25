@@ -4,7 +4,7 @@ resource "aws_instance" "web-remote" {
     key_name = "virkey"
     availability_zone = "us-east-1a"
     tags = {
-      Name = "file-ec2"
+      Name = "remote-pvr"
     }
     provisioner "remote-exec" {
       # inline is user to write multiple commands at a time
@@ -15,6 +15,12 @@ resource "aws_instance" "web-remote" {
         "touch hello.txt",
         "echo hello world remote provisioner >> hello.txt"
        ]
+      connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("C:\\Users\\sai\\Desktop\\virkey.pem")
+      host        = self.public_ip
+    }
       
     }
 }

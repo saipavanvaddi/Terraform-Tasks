@@ -4,10 +4,16 @@ resource "aws_instance" "web-file" {
     key_name = "virkey"
     availability_zone = "us-east-1a"
     tags = {
-      Name = "file-ec2"
+      Name = "file-pvr"
     }
     provisioner "file" {
       source = "C:\\Users\\sai\\Desktop\\index.html"
-      destination = "/home/ubuntu/index.html"
+      destination = "/home/ec2-user/index.html"
+      connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("C:\\Users\\sai\\Desktop\\virkey.pem")
+      host        = self.public_ip
+    }
     }
 }

@@ -4,7 +4,7 @@ resource "aws_instance" "web-local" {
     key_name = "virkey"
     availability_zone = "us-east-1a"
     tags = {
-      Name = "file-ec2"
+      Name = "Local-pvr"
     }
     provisioner "local-exec" {
       command = "touch hello.txt"
